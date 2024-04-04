@@ -11,7 +11,7 @@ HBNB_STATIC_LOCATION="location /hbnb_static/ {
     try_files \$uri \$uri/ =404;
 }"
 
-
+# Checks if nginx is installed or not
 if ! command -v nginx > /dev/null 2>&1; then
     sudo apt-get update
     sudo apt-get install nginx -y
