@@ -2,14 +2,18 @@
 # Sets up your web servers for the deployment of web_static
 
 # Path to the Nginx configuration file
-NGINX_CONF="/etc/nginx/nginx.conf"
+NGINX_CONF="/etc/nginx/sites-available/default"
 
 # The location block for serving hbnb_static
-HBNB_STATIC_LOCATION="location /hbnb_static/ {
+HBNB_STATIC_LOCATION="server {
+    listen 80;
+    location /hbnb_static/ {
     alias /data/web_static/current/;
     index index.html;
     try_files \$uri \$uri/ =404;
+    }
 }"
+
 
 # Checks if nginx is installed or not
 if ! command -v nginx > /dev/null 2>&1; then
@@ -36,4 +40,4 @@ sudo chown -R ubuntu:ubuntu /data/
 # Add the location block to the config
 echo -e "\n$HBNB_STATIC_LOCATION" >> "$NGINX_CONF"
 
-nginx -s reload
+sudo service nginx restart
