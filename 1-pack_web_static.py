@@ -3,10 +3,17 @@
 from fabric.api import local
 from datetime import datetime
 
+
 def do_pack():
     date = datetime.now().strftime("%Y%m%d%H%M%S")
 
-    local('tar -cvzf versions/web_static_{}.tgz web_static'.format(date))
+    try:
+        local('mkdir -p versions')
+        filename = 'web_static_{}.tgz'.format(date)
+        local('tar -cvzf versions/{} web_static'.format(filename))
+        return ("versions/{}".format(filename))
+    except Exception as e:
+        return None
 
 
 if __name__ == "__main__":
