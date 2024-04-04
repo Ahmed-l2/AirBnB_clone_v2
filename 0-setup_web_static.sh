@@ -1,20 +1,6 @@
 #!/usr/bin/env bash
 # Sets up your web servers for the deployment of web_static
 
-# Path to the Nginx configuration file
-NGINX_CONF="/etc/nginx/sites-available/default"
-
-# The location block for serving hbnb_static
-HBNB_STATIC_LOCATION="server {
-    listen 80;
-    location /hbnb_static/ {
-    alias /data/web_static/current/;
-    index index.html;
-    try_files \$uri \$uri/ =404;
-    }
-}"
-
-
 # Checks if nginx is installed or not
 if ! command -v nginx > /dev/null 2>&1; then
     sudo apt-get update
@@ -29,15 +15,7 @@ mkdir -p /data/web_static/releases/
 mkdir -p /data/web_static/releases/test/
 
 # Simple HTML file for testing
-echo "
-<html>
-  <head>
-  </head>
-  <body>
-    Holberton School
-  </body>
-</html>
-" > /data/web_static/releases/test/index.html
+echo "HELLO WORLD!" > /data/web_static/releases/test/index.html
 
 # Create or recreate the symbolic link
 ln -sf /data/web_static/releases/test/ /data/web_static/current
@@ -46,6 +24,7 @@ ln -sf /data/web_static/releases/test/ /data/web_static/current
 sudo chown -R ubuntu:ubuntu /data/
 
 # Add the location block to the config
-echo -e "\n$HBNB_STATIC_LOCATION" >> "$NGINX_CONF"
+sed -i '38i\\tlocation /hbnb_static/ {\n\t\talias /data/web_static/current/;\n\t}\n' /etc/nginx/sites-available/default
 
+# Restart NGINX server
 sudo service nginx restart
