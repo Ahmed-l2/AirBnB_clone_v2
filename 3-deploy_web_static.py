@@ -7,12 +7,15 @@ import os
 env.hosts = ['52.3.255.136', '54.144.142.157']
 env.user = 'ubuntu'
 
+
 def deploy():
     """ Deploy the the archive dynamically"""
     archive_path = do_pack()
     if archive_path is None:
         return False
-    return do_deploy(archive_path)
+    result = do_deploy(archive_path)
+    return result
+
 
 def do_pack():
     """generates a .tgz archive from the contents of the web_static"""
