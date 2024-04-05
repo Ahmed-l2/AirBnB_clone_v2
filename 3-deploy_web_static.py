@@ -44,13 +44,13 @@ def do_deploy(archive_path):
 
 
 def deploy():
-    """Creates and distributes an archive to your web servers"""
-    path = do_pack()
-    if path is None:
+    """ Deploy the the archive dynamically"""
+    archive_path = os.getenv('archive_path', None)
+    if archive_path is None:
+        archive_path = do_pack()
+        os.environ['archive_path'] = archive_path
+
+    if archive_path is None:
         return False
-    else:
-        for host in env.hosts:
-            env.host_string = host
-            if not do_deploy(path):
-                return False
-        return True
+    result = do_deploy(archive_path)
+    return result
