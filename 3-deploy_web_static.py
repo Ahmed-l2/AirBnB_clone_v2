@@ -44,9 +44,13 @@ def do_deploy(archive_path):
 
 
 def deploy():
-    """"creates and distributes an archive to your web servers"""
+    """Creates and distributes an archive to your web servers"""
     path = do_pack()
     if path is None:
         return False
     else:
-        return do_deploy(path)
+        for host in env.hosts:
+            env.host_string = host
+            if not do_deploy(path):
+                return False
+        return True
