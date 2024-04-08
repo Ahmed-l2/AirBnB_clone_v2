@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """a Fabric script that generates a .tgz archive"""
-from fabric.api import local, env, put, run
+from fabric.api import local, env, put, run, lcd, cd
 from datetime import datetime
 import os
 
@@ -56,7 +56,7 @@ def do_clean(number=0):
     if int(number) == 0:
         number = 1
     else:
-        int(number)
+        number = int(number)
 
     files = sorted(os.listdir("versions"))
 
