@@ -29,7 +29,7 @@ def pye(text="is_cool"):
 
 @app.route("/number/<n>", strict_slashes=False)
 def num(n):
-        return "{} is the number".format(int(n))
+        return "{} is a number".format(int(n))
 
 
 if __name__ == "__main__":
