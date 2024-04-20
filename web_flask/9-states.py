@@ -25,7 +25,7 @@ def state_by_id(id):
         if state.id == id:
             return render_template("9-states.html",
                            states=state)
-    return render_template("9-states.html")
+    return render_template("9-states.html", states=None)
 
 
 if __name__ == "__main__":
