@@ -5,7 +5,7 @@
     </HEAD>
     <BODY>
         <H1>States</H1>
-	{% if with_id == False %}
+	{% if {{with_id}} == False %}
             <UL>
             {% for state in states.values()|sort(attribute='name') %}
                 <LI>{{ state.id }}: <B>{{ state.name }}</B></LI>
