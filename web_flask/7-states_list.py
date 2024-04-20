@@ -17,8 +17,7 @@ def teardown(self):
 @app.route("/states_list", strict_slashes=False)
 def state_list():
     """list of all State objects present in DBStorage sorted by name"""
-    states = list(storage.all(State).values())
-    states.sort(key=lambda s: s.name)
+    states = storage.all(State)
     return render_template("7-states_list.html", states=states)
 
 
