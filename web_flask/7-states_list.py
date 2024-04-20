@@ -48,11 +48,11 @@ def odd_even(n):
 @app.route("/states_list", strict_slashes=False)
 def state_list():
     states = sorted(storage.all(State).values(), key=lambda s: s.name)
-    return render_template("7-states_list.html", States=states)
+    return render_template("7-states_list.html", states=states)
 
 
 @app.teardown_appcontext
-def close():
+def teardown(exception):
     storage.close()
 
 
