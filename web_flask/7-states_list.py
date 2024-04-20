@@ -2,6 +2,7 @@
 """FLASK APP"""
 
 from models import storage
+from models.state import State
 from flask import Flask, render_template
 
 app = Flask(__name__)
@@ -14,7 +15,7 @@ def teardown(exception=None):
 
 @app.route("/states_list", strict_slashes=False)
 def state_list():
-    states = list(storage.all("State").values())
+    states = list(storage.all(State).values())
     states.sort(key=lambda s: s.name)
     return render_template("7-states_list.html", states=states)
 
