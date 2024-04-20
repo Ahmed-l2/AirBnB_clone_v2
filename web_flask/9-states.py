@@ -18,7 +18,13 @@ def teardown(exception):
 def state_list():
     states = storage.all(State)
     return render_template("8-cities_by_states.html",
-                           states=storage.all(State))
+                           states=storage.all(State), with_id=False)
+
+@app.route("/states/<id>", strict_slashes=False)
+def state_list_id(id):
+    states = storage.all(State)
+    return render_template("8-cities_by_states.html",
+                           states=state, state_id=id, with_id=True)
 
 
 if __name__ == "__main__":
