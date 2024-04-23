@@ -17,7 +17,8 @@ def teardown(self):
 @app.route("/states_list", strict_slashes=False)
 def state_list():
     """list of all State objects present in DBStorage"""
-    return render_template("7-states_list.html", states=storage.all(State))
+    states = storage.all("State")
+    return render_template("7-states_list.html", states=states)
 
 
 if __name__ == "__main__":
